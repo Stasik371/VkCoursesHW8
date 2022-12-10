@@ -81,13 +81,13 @@ public final class JacksonMessageBodyHandler<T> implements MessageBodyReader<T>,
                         OutputStream entityStream) throws WebApplicationException {
         try (PrintWriter printWriter =
                      new PrintWriter(new OutputStreamWriter(entityStream, StandardCharsets.UTF_8), true)) {
-
-            ContextResolver<ObjectMapper> resolver = providers.getContextResolver(ObjectMapper.class, MediaType.APPLICATION_JSON_TYPE);
-            ObjectMapper providedMapper = resolver.getContext(getClass());
-            String json = providedMapper.writeValueAsString(t);
+            final String json = ui.getQueryParameters().containsKey(PRETTY_PRINT_PARAMETER_NAME)
+                    ? prettyObjectMapper.writeValueAsString(t)
+                    : objectMapper.writeValueAsString(t);
             printWriter.write(json);
         } catch (JsonProcessingException e) {
             throw new WebApplicationException(e);
         }
     }
 }
+

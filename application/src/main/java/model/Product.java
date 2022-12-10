@@ -30,19 +30,4 @@ public class Product {
         this.amount = amount;
     }
 
-    final String json = "{" +
-            "\"data\": \"something\", " +
-            "\"valueNames\": [5, 4, 3, 2, 1], " +
-            "\"unknownProperty\": \"value\"" +
-            "}";
-
-    @Override
-    public String toString() {
-        return "{" +
-                "\"id=\": " + id + ", " +
-                "\"nameOfOrganization=\": " + nameOfOrganization + ", " +
-                "\"name=\": " + name + '\'' + ", " +
-                "\"amount=\": " + amount +
-                '}';
-    }
 }

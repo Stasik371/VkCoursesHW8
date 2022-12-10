@@ -7,6 +7,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
 import static org.apache.http.HttpHeaders.CACHE_CONTROL;
 
 @Path("/prod")
@@ -21,7 +22,7 @@ public class DataREST {
 
     @GET
     @Path("/allProducts")
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response getAllProducts() {
         return Response
                 .ok(requestsWithDataBase.getAllProductsFromDateBase())
@@ -59,8 +60,8 @@ public class DataREST {
 
     @GET
     @Path("/ProductsWithRightOrganization/{organization}")
-    @Produces(MediaType.TEXT_PLAIN)
-    public Response getProductsWithRightOrganization(@PathParam("organization") String organization){
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getProductsWithRightOrganization(@PathParam("organization") String organization) {
         return Response
                 .ok(requestsWithDataBase.getProductsWithRightOrg(organization))
                 .header(CACHE_CONTROL, "no-cache")
